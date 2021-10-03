@@ -19,7 +19,7 @@ public class UserController {
     private final NftService nftService;
     private final LikeService likeService;
 
-    @PostMapping("user/save-update")
+    @PostMapping("/save-update")
     public ResponseEntity<UserDto> saveOrUpdate(@RequestBody Oauth2AttributeDto oauth2AttributeDto) throws ParseException {
         User info = userService.userSaveOrUpdate(oauth2AttributeDto);
         UserDto userInfo = new UserDto().toDto(info);
