@@ -35,7 +35,7 @@ public class User {
     @Column(nullable = true)
     private String name;
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
     private String picture;

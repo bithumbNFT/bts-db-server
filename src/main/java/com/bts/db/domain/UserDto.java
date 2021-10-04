@@ -18,12 +18,14 @@ public class UserDto {
     private String name;
     private String email;
     private String picture;
+    private String coinWallet;
     private Role role;
 
     public UserDto toDto(User user) {
         return UserDto.builder().id(user.getUserId())
                 .email(user.getEmail())
                 .name(user.getName())
+                .coinWallet(user.getCoinWallet())
                 .picture(user.getPicture())
                 .role(user.getRole())
                 .social(user.getSocial()).build();
