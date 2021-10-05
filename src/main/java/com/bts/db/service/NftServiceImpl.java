@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -40,25 +41,25 @@ public class NftServiceImpl implements NftService{
     @Override
     public List<NFT> findNft(Long id) {
         User user = userRepository.findByuserId(id).orElse(null);
-        List<NFT> nfts = nftRepository.findByuserId(user);
+        List<NFT> nfts = nftRepository.findByuserId(user).orElse(null);
         return nfts;
     }
 
     @Override
     public List findNftByNftId(String nftid) {
-        List<NFT> nfts = nftRepository.findById(nftid);
+        List<NFT> nfts = nftRepository.findById(nftid).orElse(null);
         return nfts;
     }
     @Override
     public List<NFT> findNftAll(){
-        List<NFT> nfts = nftRepository.findAll();
+        Optional<List<NFT>> nfts = Optional.ofNullable(nftRepository.findAll());
         System.out.println(nfts);
-        return nfts;
+        return nfts.get();
     }
 
     @Override
     public HashMap<String, String> moveNft(SendDto sendDto) {
-        List<NFT> nft = nftRepository.findById(sendDto.getId());
+        List<NFT> nft = nftRepository.findById(sendDto.getId()).orElse(null);
         User user = userRepository.findByuserId(Long.parseLong(sendDto.getTo())).orElse(null);
         NFT pick = nft.get(0);
         NFT remove = pick;
@@ -72,7 +73,7 @@ public class NftServiceImpl implements NftService{
 
     @Override
     public HashMap<String, String> deleteNft(DeleteDto deleteDto) {
-        List<NFT> nft = nftRepository.findById(deleteDto.getId());
+        List<NFT> nft = nftRepository.findById(deleteDto.getId()).orElse(null);
         NFT pick = nft.get(0);
         nftRepository.delete(pick);
         HashMap<String, String> status = new HashMap<>();

@@ -22,7 +22,7 @@ public class LikeServiceImpl implements LikeService{
 
     public HashMap<String,String> likenft(LikeDto likedto)
     {
-        NFT nft = nftRepository.findById(likedto.getNftid()).get(0);
+        NFT nft = nftRepository.findById(likedto.getNftid()).get().get(0);
         User user = userRepository.findByuserId(Long.parseLong(likedto.getUser())).orElse(null);
         Like like = Like.builder().No(nft).userId(user).build();
         likeRepository.save(like);
@@ -34,15 +34,15 @@ public class LikeServiceImpl implements LikeService{
     @Override
     public List<Like> likelist(String user) {
         User id = userRepository.findByuserId(Long.parseLong(user)).orElse(null);
-        List<Like> likes = likeRepository.findByuserId(id);
+        List<Like> likes = likeRepository.findByuserId(id).orElse(null);
         return likes;
     }
 
     @Override
     public HashMap<String, String> deletelikenft(LikeDto likedto) {
-        NFT nft = nftRepository.findById(likedto.getNftid()).get(0);
+        NFT nft = nftRepository.findById(likedto.getNftid()).get().get(0);
         User user = userRepository.findByuserId(Long.parseLong(likedto.getUser())).orElse(null);
-        List<Like> like = likeRepository.findByuserId(user);
+        List<Like> like = likeRepository.findByuserId(user).orElse(null);
         Like deletelike = new Like();
         for(int i = 0 ; i<like.size();i++){
             if(like.get(i).getNo().getId()==nft.getId()){
