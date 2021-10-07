@@ -57,7 +57,6 @@ public class NftServiceImpl implements NftService{
     @Override
     public List<NFT> findNftAll(){
         Optional<List<NFT>> nfts = Optional.ofNullable(nftRepository.findAll());
-        System.out.println(nfts);
         return nfts.get();
     }
 
