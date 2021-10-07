@@ -35,7 +35,7 @@ public class NFT {
     @Column(name = "imagepath")
     private String imagepath;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User userId;
 
