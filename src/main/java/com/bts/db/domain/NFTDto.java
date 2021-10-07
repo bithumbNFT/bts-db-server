@@ -14,4 +14,6 @@ public class NFTDto {
     private Long owner;
     private String date;
     private String imagepath;
+    private Auction auction;
+    private String price;
 }

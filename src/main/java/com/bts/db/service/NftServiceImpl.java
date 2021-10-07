@@ -1,6 +1,7 @@
 package com.bts.db.service;
 
 import com.bts.db.domain.*;
+import com.bts.db.repository.LikeRepository;
 import com.bts.db.repository.NftRepository;
 import com.bts.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class NftServiceImpl implements NftService{
     private final NftRepository nftRepository;
     private final UserRepository userRepository;
+    private final LikeRepository likeRepository;
     Integer num = 8;
 
     @Override
@@ -30,6 +32,8 @@ public class NftServiceImpl implements NftService{
                 .image(Nftdto.getImage())
                 .userId(user)
                 .imagepath(Nftdto.getImagepath())
+                .auction(Nftdto.getAuction())
+                .price(Nftdto.getPrice())
                 .build();
         nftRepository.save(nft);
         HashMap<String, String> status = new HashMap<>();
@@ -75,6 +79,11 @@ public class NftServiceImpl implements NftService{
     public HashMap<String, String> deleteNft(DeleteDto deleteDto) {
         List<NFT> nft = nftRepository.findById(deleteDto.getId()).orElse(null);
         NFT pick = nft.get(0);
+        List<Like> likes = likeRepository.findByno(pick).orElse(null);
+        for (int i =0; i<likes.size();i++){
+            Like like = likes.get(i);
+            likeRepository.delete(like);
+        }
         nftRepository.delete(pick);
         HashMap<String, String> status = new HashMap<>();
         status.put("status","OK");

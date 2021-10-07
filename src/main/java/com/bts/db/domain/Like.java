@@ -16,10 +16,10 @@ public class Like {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="number")
     private Integer number;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="NO")
     private NFT no;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User userId;
 

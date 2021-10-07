@@ -10,4 +10,5 @@ import java.util.Optional;
 
 public interface LikeRepository extends JpaRepository<Like,Long> {
     Optional<List<Like>> findByuserId(User id);
+    Optional<List<Like>> findByno(NFT no);
 }
