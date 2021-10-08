@@ -40,6 +40,14 @@ public class UserServiceImpl implements UserService {
         status.put("status","OK");
         return status;
     }
+    @Override
+    public HashMap<String, String> findaddressbyemail(String email) {
+        User user = userRepository.findByemail(email).orElse(null);
+        HashMap<String, String> result = new HashMap<>();
+        result.put("address",user.getCoinWallet().toString());
+        result.put("id",user.getUserId().toString());
+        return result;
+    }
 
     @Override
     public HashMap<String,String> findById(Long id) {

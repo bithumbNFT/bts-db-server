@@ -1,6 +1,7 @@
-package com.bts.db.domain;
+package com.bts.db.Dto;
 
 
+import com.bts.db.domain.Auction;
 import lombok.Data;
 import lombok.Getter;
 
@@ -16,4 +17,5 @@ public class NFTDto {
     private String imagepath;
     private Auction auction;
     private String price;
+    private Integer term;
 }

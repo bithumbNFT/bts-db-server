@@ -1,5 +1,7 @@
-package com.bts.db.domain;
+package com.bts.db.Dto;
 
+import com.bts.db.domain.Role;
+import com.bts.db.domain.User;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;

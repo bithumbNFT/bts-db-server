@@ -1,4 +1,4 @@
-package com.bts.db.domain;
+package com.bts.db.Dto;
 
 import lombok.Data;
 

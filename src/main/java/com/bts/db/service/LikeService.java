@@ -1,7 +1,7 @@
 package com.bts.db.service;
 
 import com.bts.db.domain.Like;
-import com.bts.db.domain.LikeDto;
+import com.bts.db.Dto.LikeDto;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

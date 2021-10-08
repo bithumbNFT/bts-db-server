@@ -1,5 +1,6 @@
 package com.bts.db.controller;
 
+import com.bts.db.Dto.*;
 import com.bts.db.domain.*;
 import com.bts.db.service.LikeService;
 import com.bts.db.service.NftService;
@@ -83,6 +84,18 @@ public class UserController {
     public ResponseEntity<HashMap<String,String>> deleteNft(@RequestBody DeleteDto deleteDto)
     {
         return ResponseEntity.ok(nftService.deleteNft(deleteDto));
+    }
+    @PostMapping("team/start")
+    public ResponseEntity<List<NFT>> auctionstart(@RequestBody StartDto startDto){
+        return ResponseEntity.ok(nftService.anctionstart(startDto));
+    }
+    @GetMapping("team/email/{useremail}/")
+    public ResponseEntity<HashMap<String,String>> getaddressByUserEmail(@PathVariable String useremail){
+        return ResponseEntity.ok(userService.findaddressbyemail(useremail));
+    }
+    @PostMapping("team/finish")
+    public ResponseEntity<HashMap<String,String>> auctionfinish(@RequestBody FinishDto finishdto){
+        return ResponseEntity.ok(nftService.auctionfinish(finishdto));
     }
 
 }

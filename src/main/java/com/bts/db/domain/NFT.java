@@ -20,27 +20,22 @@ public class NFT {
     private Long NO;
     @Column(name = "id",unique = true)
     private String id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "description")
     private String description;
-    @Column(name = "image")
     private String image;
-    @Column(name = "Date")
     private String date;
-    @Column(name = "Auction")
     private Auction auction;
     @Column(name = "startprice")
     private String price;
-    @Column(name = "imagepath")
     private String imagepath;
+    private Integer term;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User userId;
 
     @Builder
-    public NFT (String id, String name, String description, String image, User userId, String date, String imagepath, Auction auction, String price)
+    public NFT (String id, String name, String description, String image, User userId, String date, String imagepath, Auction auction, String price,Integer term)
     {
         this.id = id;
         this.name = name;
@@ -51,6 +46,7 @@ public class NFT {
         this.imagepath = imagepath;
         this.auction = auction;
         this.price = price;
+        this.term = term;
     }
 
 

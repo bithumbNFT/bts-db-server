@@ -1,5 +1,6 @@
 package com.bts.db.service;
 
+import com.bts.db.Dto.*;
 import com.bts.db.domain.*;
 import com.bts.db.repository.LikeRepository;
 import com.bts.db.repository.NftRepository;
@@ -19,7 +20,6 @@ public class NftServiceImpl implements NftService{
     private final NftRepository nftRepository;
     private final UserRepository userRepository;
     private final LikeRepository likeRepository;
-    Integer num = 8;
 
     @Override
     public HashMap<String, String> saveNft(NFTDto Nftdto) {
@@ -34,11 +34,11 @@ public class NftServiceImpl implements NftService{
                 .imagepath(Nftdto.getImagepath())
                 .auction(Nftdto.getAuction())
                 .price(Nftdto.getPrice())
+                .term(Nftdto.getTerm())
                 .build();
         nftRepository.save(nft);
         HashMap<String, String> status = new HashMap<>();
         status.put("status","OK");
-        num++;
         return status;
     }
 
@@ -87,6 +87,23 @@ public class NftServiceImpl implements NftService{
         HashMap<String, String> status = new HashMap<>();
         status.put("status","OK");
         return status;
+    }
+
+    @Override
+    public List<NFT> anctionstart(StartDto startDto) {
+        List<NFT> nfts = nftRepository.findById(startDto.getNftid()).orElse(null);
+        nfts.get(0).setAuction(startDto.getAuction());
+        nftRepository.save(nfts.get(0));
+        return nfts;
+    }
+    @Override
+    public HashMap<String,String> auctionfinish(FinishDto finishDto) {
+        List<NFT> nfts = nftRepository.findById(finishDto.getId()).orElse(null);
+        nfts.get(0).setAuction(finishDto.getAuction());
+        nftRepository.save(nfts.get(0));
+        HashMap<String,String> result = new HashMap<>();
+        result.put("status","complete");
+        return result;
     }
 
 
